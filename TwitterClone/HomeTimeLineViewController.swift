@@ -10,7 +10,7 @@ import UIKit
 
 class HomeTimeLineViewController: UIViewController, UITableViewDataSource
 {
-    var tweets = [Tweet]?
+    var tweets : [Tweet]?
     
     override func viewDidLoad()
     {
@@ -21,7 +21,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
             var error : NSError?
             let jsonData = NSData(contentsOfFile: path)
             
-            let tweets = Tweet.parseJSONData
+            self.tweets = Tweet.parseJSONDataIntoTweets(jsonData)
         }
     }
     
@@ -40,11 +40,13 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as UITableViewCell
-        let tweet = self.tweets[indexPath.row]
+        let tweet = self.tweets?[indexPath.row]
         cell.textLabel?.text = tweet?.text
         
         return cell
     }
+    
+    //MARK: No idea why this thing exists but afraid to delete it.
 
     override func didReceiveMemoryWarning()
     {
