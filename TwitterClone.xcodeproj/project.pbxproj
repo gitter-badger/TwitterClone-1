@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		16ADACC319E30A1D0011B71F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACC219E30A1D0011B71F /* AppDelegate.swift */; };
 		16ADACC619E30A1D0011B71F /* TwitterClone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACC419E30A1D0011B71F /* TwitterClone.xcdatamodeld */; };
-		16ADACC819E30A1D0011B71F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACC719E30A1D0011B71F /* ViewController.swift */; };
 		16ADACCB19E30A1D0011B71F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16ADACC919E30A1D0011B71F /* Main.storyboard */; };
 		16ADACCD19E30A1D0011B71F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16ADACCC19E30A1D0011B71F /* Images.xcassets */; };
 		16ADACD019E30A1D0011B71F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16ADACCE19E30A1D0011B71F /* LaunchScreen.xib */; };
 		16ADACDC19E30A1D0011B71F /* TwitterCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACDB19E30A1D0011B71F /* TwitterCloneTests.swift */; };
+		16ADACE919E3110A0011B71F /* HomeTimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACE819E3110A0011B71F /* HomeTimeLineViewController.swift */; };
+		16ADACEB19E313630011B71F /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACEA19E313630011B71F /* Tweet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,13 +32,14 @@
 		16ADACC119E30A1D0011B71F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16ADACC219E30A1D0011B71F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16ADACC519E30A1D0011B71F /* TwitterClone.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TwitterClone.xcdatamodel; sourceTree = "<group>"; };
-		16ADACC719E30A1D0011B71F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		16ADACCA19E30A1D0011B71F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16ADACCC19E30A1D0011B71F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		16ADACCF19E30A1D0011B71F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		16ADACD519E30A1D0011B71F /* TwitterCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwitterCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16ADACDA19E30A1D0011B71F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16ADACDB19E30A1D0011B71F /* TwitterCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCloneTests.swift; sourceTree = "<group>"; };
+		16ADACE819E3110A0011B71F /* HomeTimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTimeLineViewController.swift; sourceTree = "<group>"; };
+		16ADACEA19E313630011B71F /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,11 +82,11 @@
 			isa = PBXGroup;
 			children = (
 				16ADACC219E30A1D0011B71F /* AppDelegate.swift */,
-				16ADACC719E30A1D0011B71F /* ViewController.swift */,
-				16ADACC919E30A1D0011B71F /* Main.storyboard */,
+				16ADACE719E30A3D0011B71F /* Controller Layer */,
+				16ADACE619E30A350011B71F /* View Layer */,
+				16ADACE519E30A2D0011B71F /* Model Layer */,
 				16ADACCC19E30A1D0011B71F /* Images.xcassets */,
 				16ADACCE19E30A1D0011B71F /* LaunchScreen.xib */,
-				16ADACC419E30A1D0011B71F /* TwitterClone.xcdatamodeld */,
 				16ADACC019E30A1D0011B71F /* Supporting Files */,
 			);
 			path = TwitterClone;
@@ -113,6 +115,31 @@
 				16ADACDA19E30A1D0011B71F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		16ADACE519E30A2D0011B71F /* Model Layer */ = {
+			isa = PBXGroup;
+			children = (
+				16ADACC419E30A1D0011B71F /* TwitterClone.xcdatamodeld */,
+				16ADACEA19E313630011B71F /* Tweet.swift */,
+			);
+			name = "Model Layer";
+			sourceTree = "<group>";
+		};
+		16ADACE619E30A350011B71F /* View Layer */ = {
+			isa = PBXGroup;
+			children = (
+				16ADACC919E30A1D0011B71F /* Main.storyboard */,
+			);
+			name = "View Layer";
+			sourceTree = "<group>";
+		};
+		16ADACE719E30A3D0011B71F /* Controller Layer */ = {
+			isa = PBXGroup;
+			children = (
+				16ADACE819E3110A0011B71F /* HomeTimeLineViewController.swift */,
+			);
+			name = "Controller Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +242,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16ADACC819E30A1D0011B71F /* ViewController.swift in Sources */,
 				16ADACC319E30A1D0011B71F /* AppDelegate.swift in Sources */,
 				16ADACC619E30A1D0011B71F /* TwitterClone.xcdatamodeld in Sources */,
+				16ADACE919E3110A0011B71F /* HomeTimeLineViewController.swift in Sources */,
+				16ADACEB19E313630011B71F /* Tweet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
