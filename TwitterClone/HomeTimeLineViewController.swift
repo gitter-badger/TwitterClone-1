@@ -7,17 +7,57 @@
 //
 
 import UIKit
+import Accounts
+import Social
 
 class HomeTimeLineViewController: UIViewController, UITableViewDataSource
 {
     var tweets : [Tweet]?
     var tweetSortStyle: String = "default"
+    var twitterAccount : ACAccount?
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        let accountStore = ACAccountStore()
+        let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+        accountStore.requestAccessToAccountsWithType(accountType, options: nil)
+            { (granted: Bool, error : NSError!) -> Void in
+                if granted
+                {
+                    let accounts = accountStore.accountsWithAccountType(accountType)
+                    self.twitterAccount = accounts.first as ACAccount?
+                    //setup our twitter request
+                    let url = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
+                    let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: nil)
+                    twitterRequest.account = self.twitterAccount
+                    
+                    twitterRequest.performRequestWithHandler(
+                    { (data, httpResponse, error) -> Void in
+                        
+                        switch httpResponse.statusCode
+                        {
+                            case 200...299:
+                                println("this is good!")
+                                self.tweets = Tweet.parseJSONDataIntoTweets(data)
+                                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                                    self.tableView.reloadData()
+                                })
+                                //At this point we are in a background thread. Left main thread at "performRequestWithHandler."
+                            case 400...499:
+                                println("This is the client's fault.")
+                            case 500...5999:
+                                println("This is the server's fault.")
+                            default:
+                                println("something bad happened")
+                        }
+                        
+                    })
+                }
+            }
         
         if let path = NSBundle.mainBundle().pathForResource("tweet", ofType: "json")
         {
@@ -58,7 +98,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
                 tweet = self.tweets?[indexPath.row]
             
             default:
-                println("default laout")
+                println("default layout")
             
         }
         
