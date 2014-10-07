@@ -11,6 +11,9 @@ import UIKit
 class HomeTimeLineViewController: UIViewController, UITableViewDataSource
 {
     var tweets : [Tweet]?
+    var tweetSortStyle: String = "default"
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad()
     {
@@ -23,6 +26,9 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
             
             self.tweets = Tweet.parseJSONDataIntoTweets(jsonData)
         }
+        
+        let sortButton = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.Plain, target: self, action: "sortTweets")
+        self.navigationItem.leftBarButtonItem = sortButton
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -40,10 +46,31 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as UITableViewCell
-        let tweet = self.tweets?[indexPath.row]
-        cell.textLabel?.text = tweet?.text
+        var tweet = self.tweets?[indexPath.row]
         
+        switch tweetSortStyle
+        {
+//            case "chronological":
+//                let tweet = self.tweets?[indexPath.row]
+//            
+            case "alphabetical":
+                tweets!.sort{$0.text < $1.text}
+                tweet = self.tweets?[indexPath.row]
+            
+            default:
+                println("default laout")
+            
+        }
+        
+        cell.textLabel?.text = tweet?.text
+
         return cell
+    }
+    
+    func sortTweets ()
+    {
+        tweetSortStyle = "alphabetical"
+        self.tableView.reloadData()
     }
     
     //MARK: No idea why this thing exists but afraid to delete it.
