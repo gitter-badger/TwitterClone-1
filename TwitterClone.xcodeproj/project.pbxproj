@@ -17,6 +17,7 @@
 		16ADACDC19E30A1D0011B71F /* TwitterCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACDB19E30A1D0011B71F /* TwitterCloneTests.swift */; };
 		16ADACE919E3110A0011B71F /* HomeTimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACE819E3110A0011B71F /* HomeTimeLineViewController.swift */; };
 		16ADACEB19E313630011B71F /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACEA19E313630011B71F /* Tweet.swift */; };
+		16B85E0D19E5E50B00D7E794 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B85E0C19E5E50B00D7E794 /* TweetViewController.swift */; };
 		16D3313B19E48306006B0CC3 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3313A19E48306006B0CC3 /* TweetCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		16ADACDB19E30A1D0011B71F /* TwitterCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCloneTests.swift; sourceTree = "<group>"; };
 		16ADACE819E3110A0011B71F /* HomeTimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTimeLineViewController.swift; sourceTree = "<group>"; };
 		16ADACEA19E313630011B71F /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		16B85E0C19E5E50B00D7E794 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		16D3313A19E48306006B0CC3 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +149,7 @@
 			children = (
 				16ADACE819E3110A0011B71F /* HomeTimeLineViewController.swift */,
 				16A9356A19E5B5010066FCBC /* NetworkController.swift */,
+				16B85E0C19E5E50B00D7E794 /* TweetViewController.swift */,
 			);
 			name = "Controller Layer";
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				16ADACC619E30A1D0011B71F /* TwitterClone.xcdatamodeld in Sources */,
 				16A9356B19E5B5010066FCBC /* NetworkController.swift in Sources */,
 				16D3313B19E48306006B0CC3 /* TweetCell.swift in Sources */,
+				16B85E0D19E5E50B00D7E794 /* TweetViewController.swift in Sources */,
 				16ADACE919E3110A0011B71F /* HomeTimeLineViewController.swift in Sources */,
 				16ADACEB19E313630011B71F /* Tweet.swift in Sources */,
 			);
