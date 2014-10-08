@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361p" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tLu-xz-EBe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Home Time Line View Controller-->
@@ -16,16 +18,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KkG-WM-0fQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KkG-WM-0fQ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TWEET_CELL" id="fQj-fR-Sts">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TWEET_CELL" rowHeight="80" id="fQj-fR-Sts" customClass="TweetCell" customModule="TwitterClone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fQj-fR-Sts" id="H9U-gd-8IQ">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" lineBreakMode="wordWrap" numberOfLines="4" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sby-Tp-HLI">
+                                                    <rect key="frame" x="80" y="8" width="512" height="63.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZSc-Vf-daP">
+                                                    <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                                    <color key="backgroundColor" red="0.38263559749999998" green="1" blue="0.066124523579999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ZSc-Vf-daP" secondAttribute="height" multiplier="1:1" id="LRe-6T-9ZK"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ZSc-Vf-daP" secondAttribute="bottom" constant="-0.5" id="0A7-Gs-AuH"/>
+                                                <constraint firstItem="Sby-Tp-HLI" firstAttribute="trailing" secondItem="H9U-gd-8IQ" secondAttribute="trailingMargin" id="D0h-mv-ZrU"/>
+                                                <constraint firstItem="ZSc-Vf-daP" firstAttribute="leading" secondItem="H9U-gd-8IQ" secondAttribute="leadingMargin" id="LbC-0O-aNP"/>
+                                                <constraint firstItem="Sby-Tp-HLI" firstAttribute="top" secondItem="H9U-gd-8IQ" secondAttribute="topMargin" id="T1M-xf-H23"/>
+                                                <constraint firstItem="Sby-Tp-HLI" firstAttribute="bottom" secondItem="H9U-gd-8IQ" secondAttribute="bottomMargin" id="UiD-cU-joi"/>
+                                                <constraint firstItem="ZSc-Vf-daP" firstAttribute="top" secondItem="H9U-gd-8IQ" secondAttribute="topMargin" id="Wbg-m5-m5a"/>
+                                                <constraint firstItem="Sby-Tp-HLI" firstAttribute="leading" secondItem="ZSc-Vf-daP" secondAttribute="trailing" constant="8" id="cFf-Pf-H46"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="tweetAvatar" destination="ZSc-Vf-daP" id="hhA-R8-7oU"/>
+                                            <outlet property="tweetText" destination="Sby-Tp-HLI" id="teP-yh-Yvy"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -48,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1136" y="372"/>
+            <point key="canvasLocation" x="1136" y="370"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hxa-he-t33">

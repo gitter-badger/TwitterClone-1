@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		163944BF19E33FF10062BF4E /* tweet.json in Resources */ = {isa = PBXBuildFile; fileRef = 163944BE19E33FF10062BF4E /* tweet.json */; };
 		16ADACC319E30A1D0011B71F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACC219E30A1D0011B71F /* AppDelegate.swift */; };
 		16ADACC619E30A1D0011B71F /* TwitterClone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACC419E30A1D0011B71F /* TwitterClone.xcdatamodeld */; };
 		16ADACCB19E30A1D0011B71F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16ADACC919E30A1D0011B71F /* Main.storyboard */; };
@@ -16,6 +15,7 @@
 		16ADACDC19E30A1D0011B71F /* TwitterCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACDB19E30A1D0011B71F /* TwitterCloneTests.swift */; };
 		16ADACE919E3110A0011B71F /* HomeTimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACE819E3110A0011B71F /* HomeTimeLineViewController.swift */; };
 		16ADACEB19E313630011B71F /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACEA19E313630011B71F /* Tweet.swift */; };
+		16D3313B19E48306006B0CC3 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3313A19E48306006B0CC3 /* TweetCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +29,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		163944BE19E33FF10062BF4E /* tweet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweet.json; sourceTree = "<group>"; };
 		16ADACBD19E30A1D0011B71F /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16ADACC119E30A1D0011B71F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16ADACC219E30A1D0011B71F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		16ADACDB19E30A1D0011B71F /* TwitterCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCloneTests.swift; sourceTree = "<group>"; };
 		16ADACE819E3110A0011B71F /* HomeTimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTimeLineViewController.swift; sourceTree = "<group>"; };
 		16ADACEA19E313630011B71F /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		16D3313A19E48306006B0CC3 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +124,6 @@
 			children = (
 				16ADACC419E30A1D0011B71F /* TwitterClone.xcdatamodeld */,
 				16ADACEA19E313630011B71F /* Tweet.swift */,
-				163944BE19E33FF10062BF4E /* tweet.json */,
 			);
 			name = "Model Layer";
 			sourceTree = "<group>";
@@ -133,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				16ADACC919E30A1D0011B71F /* Main.storyboard */,
+				16D3313A19E48306006B0CC3 /* TweetCell.swift */,
 			);
 			name = "View Layer";
 			sourceTree = "<group>";
@@ -228,7 +228,6 @@
 				16ADACCB19E30A1D0011B71F /* Main.storyboard in Resources */,
 				16ADACD019E30A1D0011B71F /* LaunchScreen.xib in Resources */,
 				16ADACCD19E30A1D0011B71F /* Images.xcassets in Resources */,
-				163944BF19E33FF10062BF4E /* tweet.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +247,7 @@
 			files = (
 				16ADACC319E30A1D0011B71F /* AppDelegate.swift in Sources */,
 				16ADACC619E30A1D0011B71F /* TwitterClone.xcdatamodeld in Sources */,
+				16D3313B19E48306006B0CC3 /* TweetCell.swift in Sources */,
 				16ADACE919E3110A0011B71F /* HomeTimeLineViewController.swift in Sources */,
 				16ADACEB19E313630011B71F /* Tweet.swift in Sources */,
 			);

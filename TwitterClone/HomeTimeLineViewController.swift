@@ -58,15 +58,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
                     })
                 }
             }
-        
-        if let path = NSBundle.mainBundle().pathForResource("tweet", ofType: "json")
-        {
-            var error : NSError?
-            let jsonData = NSData(contentsOfFile: path)
-            
-            self.tweets = Tweet.parseJSONDataIntoTweets(jsonData)
-        }
-        
+                
         let sortButton = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.Plain, target: self, action: "sortTweets")
         self.navigationItem.leftBarButtonItem = sortButton
     }
@@ -83,10 +75,19 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
         }
     }
     
+    //MARK: TableVIew Methods
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
         var tweet = self.tweets?[indexPath.row]
+        
+        cell.tweetAvatar.layer.cornerRadius = cell.tweetAvatar.frame.size.width / 2
+        cell.tweetAvatar.layer.masksToBounds = true
+        cell.tweetAvatar.layer.borderWidth = 0.5
+        cell.tweetAvatar.clipsToBounds = true
+        cell.tweetAvatar.contentMode = UIViewContentMode.ScaleAspectFill
+        cell.tweetAvatar.setNeedsDisplay()
         
         switch tweetSortStyle
         {
@@ -102,7 +103,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
             
         }
         
-        cell.textLabel?.text = tweet?.text
+        cell.tweetText?.text = tweet?.text
 
         return cell
     }
