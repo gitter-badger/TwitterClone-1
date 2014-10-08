@@ -12,7 +12,7 @@ class TweetCell: UITableViewCell
 {
     @IBOutlet weak var tweetText: UILabel!
     @IBOutlet weak var tweetAvatar: UIImageView!
-
+    @IBOutlet weak var tweetHandle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -29,7 +29,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" lineBreakMode="wordWrap" numberOfLines="4" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sby-Tp-HLI">
-                                                    <rect key="frame" x="60" y="8" width="532" height="43.5"/>
+                                                    <rect key="frame" x="60" y="8" width="532" height="52"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -40,19 +40,32 @@
                                                         <constraint firstAttribute="width" secondItem="ZSc-Vf-daP" secondAttribute="height" multiplier="1:1" id="LRe-6T-9ZK"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twitter Handle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGe-oO-fGs">
+                                                    <rect key="frame" x="60" y="1" width="170" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="170" id="9fT-vU-LvV"/>
+                                                        <constraint firstAttribute="height" constant="20" id="tQf-g9-OAm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ZSc-Vf-daP" secondAttribute="bottom" constant="-0.5" id="0A7-Gs-AuH"/>
+                                                <constraint firstItem="gGe-oO-fGs" firstAttribute="leading" secondItem="ZSc-Vf-daP" secondAttribute="trailing" constant="8" id="2nx-OG-IkF"/>
                                                 <constraint firstItem="Sby-Tp-HLI" firstAttribute="trailing" secondItem="H9U-gd-8IQ" secondAttribute="trailingMargin" id="D0h-mv-ZrU"/>
                                                 <constraint firstItem="ZSc-Vf-daP" firstAttribute="leading" secondItem="H9U-gd-8IQ" secondAttribute="leadingMargin" id="LbC-0O-aNP"/>
-                                                <constraint firstItem="Sby-Tp-HLI" firstAttribute="top" secondItem="H9U-gd-8IQ" secondAttribute="topMargin" id="T1M-xf-H23"/>
-                                                <constraint firstItem="Sby-Tp-HLI" firstAttribute="bottom" secondItem="H9U-gd-8IQ" secondAttribute="bottomMargin" id="UiD-cU-joi"/>
+                                                <constraint firstItem="Sby-Tp-HLI" firstAttribute="top" secondItem="H9U-gd-8IQ" secondAttribute="topMargin" id="NWf-aC-W5E"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Sby-Tp-HLI" secondAttribute="bottom" constant="-8" id="RWb-GP-t1Q"/>
                                                 <constraint firstItem="ZSc-Vf-daP" firstAttribute="top" secondItem="H9U-gd-8IQ" secondAttribute="topMargin" id="Wbg-m5-m5a"/>
                                                 <constraint firstItem="Sby-Tp-HLI" firstAttribute="leading" secondItem="ZSc-Vf-daP" secondAttribute="trailing" constant="8" id="cFf-Pf-H46"/>
+                                                <constraint firstItem="gGe-oO-fGs" firstAttribute="top" secondItem="H9U-gd-8IQ" secondAttribute="topMargin" constant="-7" id="pR8-2n-M0c"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="tweetAvatar" destination="ZSc-Vf-daP" id="hhA-R8-7oU"/>
+                                            <outlet property="tweetHandle" destination="gGe-oO-fGs" id="Ash-SF-wsj"/>
                                             <outlet property="tweetText" destination="Sby-Tp-HLI" id="teP-yh-Yvy"/>
                                         </connections>
                                     </tableViewCell>

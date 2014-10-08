@@ -82,6 +82,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
         let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
         var tweet = self.tweets?[indexPath.row]
         
+        cell.tweetAvatar.image = tweet?.avatar
         cell.tweetAvatar.layer.cornerRadius = cell.tweetAvatar.frame.size.width / 2
         cell.tweetAvatar.layer.masksToBounds = true
         cell.tweetAvatar.layer.borderWidth = 0.5
