@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16A9356919E4E9B40066FCBC /* tweet.json in Resources */ = {isa = PBXBuildFile; fileRef = 16A9356819E4E9B40066FCBC /* tweet.json */; };
+		16A9356B19E5B5010066FCBC /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9356A19E5B5010066FCBC /* NetworkController.swift */; };
 		16ADACC319E30A1D0011B71F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACC219E30A1D0011B71F /* AppDelegate.swift */; };
 		16ADACC619E30A1D0011B71F /* TwitterClone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16ADACC419E30A1D0011B71F /* TwitterClone.xcdatamodeld */; };
 		16ADACCB19E30A1D0011B71F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16ADACC919E30A1D0011B71F /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		16A9356819E4E9B40066FCBC /* tweet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweet.json; sourceTree = "<group>"; };
+		16A9356A19E5B5010066FCBC /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		16ADACBD19E30A1D0011B71F /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16ADACC119E30A1D0011B71F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16ADACC219E30A1D0011B71F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				16ADACE819E3110A0011B71F /* HomeTimeLineViewController.swift */,
+				16A9356A19E5B5010066FCBC /* NetworkController.swift */,
 			);
 			name = "Controller Layer";
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			files = (
 				16ADACC319E30A1D0011B71F /* AppDelegate.swift in Sources */,
 				16ADACC619E30A1D0011B71F /* TwitterClone.xcdatamodeld in Sources */,
+				16A9356B19E5B5010066FCBC /* NetworkController.swift in Sources */,
 				16D3313B19E48306006B0CC3 /* TweetCell.swift in Sources */,
 				16ADACE919E3110A0011B71F /* HomeTimeLineViewController.swift in Sources */,
 				16ADACEB19E313630011B71F /* Tweet.swift in Sources */,

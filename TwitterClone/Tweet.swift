@@ -11,15 +11,22 @@ import UIKit
 
 class Tweet
 {
-    var text : String
+    var text : String?
     var avatar : UIImage?
+    var handle : String?
     
     init (tweetInfo : NSDictionary)
     {
-        self.text = tweetInfo["text"] as String
-        var avatarURL = tweetInfo["profile_image_url"] as NSURL
-        var avatarData = NSData(contentsOfURL: avatarURL)
+        //get tweet
+        self.text = tweetInfo["text"] as? String
+        //get avatar
+        let userInfo = tweetInfo["user"] as NSDictionary
+        let avatarURLString = userInfo["profile_image_url"] as String
+        let avatarURL = NSURL(string: avatarURLString)
+        let avatarData = NSData(contentsOfURL: avatarURL)
         self.avatar = UIImage(data: avatarData)
+        //get handle
+        self.handle = userInfo["name"] as? String
     }
     
     class func parseJSONDataIntoTweets(rawJSONData: NSData) -> [Tweet]?
