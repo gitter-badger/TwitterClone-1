@@ -13,7 +13,10 @@ class Tweet
 {
     var text : String?
     var avatar : UIImage?
+    var name : String?
+    var avatarURL : NSURL?
     var handle : String?
+    var timeStamp : String?
     
     init (tweetInfo : NSDictionary)
     {
@@ -22,11 +25,20 @@ class Tweet
         //get avatar
         let userInfo = tweetInfo["user"] as NSDictionary
         let avatarURLString = userInfo["profile_image_url"] as String
-        let avatarURL = NSURL(string: avatarURLString)
-        let avatarData = NSData(contentsOfURL: avatarURL)
+        self.avatarURL = NSURL(string: avatarURLString)
+        let avatarData = NSData(contentsOfURL: self.avatarURL!)
         self.avatar = UIImage(data: avatarData)
+        //get name
+        self.name = userInfo["name"] as? String
         //get handle
-        self.handle = userInfo["name"] as? String
+        var screenName = userInfo["screen_name"] as String
+        self.handle = "@" + screenName
+        //get timestamp
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "E MMM dd HH:mm:ssZ yyyy"
+        let date = formatter.dateFromString(tweetInfo["created_at"] as String)!
+        formatter.dateFormat = "h:mm a"
+        self.timeStamp = formatter.stringFromDate(date)
     }
     
     class func parseJSONDataIntoTweets(rawJSONData: NSData) -> [Tweet]?

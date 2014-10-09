@@ -10,18 +10,20 @@ import UIKit
 import Accounts
 import Social
 
-class HomeTimeLineViewController: UIViewController, UITableViewDataSource
+class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     @IBOutlet weak var tableView: UITableView!
     var tweets : [Tweet]?
     var tweetSortStyle: String = "default"
     var networkController = NetworkController()
+    var lastIndexPath : NSIndexPath?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.tableView.delegate = self
         
-       self.networkController.fetchHomeTimeLine
+        self.networkController.fetchHomeTimeLine
         { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil
             {
@@ -34,10 +36,25 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
             }
         }
         
+        //auto row size
+//        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.estimatedRowHeight = 80.0
+        
         let sortButton = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.Plain, target: self, action: "sortTweets")
         self.navigationItem.leftBarButtonItem = sortButton
     }
     
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        if let indexPath = lastIndexPath
+        {
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        }
+    }
+    
+    //MARK: TableVIew Methods
+      
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if self.tweets != nil
@@ -50,8 +67,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
         }
     }
     
-    //MARK: TableVIew Methods
-    
+  
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
@@ -59,10 +75,21 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
 //        cell.tweetText.
         
         //sets twitter handle for tweet
-        cell.tweetHandle.text = tweet?.handle
+        cell.tweetName.text = tweet?.name
         
         //sets avatar image for tweet
-        cell.tweetAvatar.image = tweet?.avatar
+        if tweet?.avatar != nil
+        {
+            cell.tweetAvatar.image = tweet?.avatar
+        }
+        else
+        {
+            self.networkController.downloadUserImageForTweet(tweet!, completionHandler:
+            { (image) -> (Void) in
+                let cellForImage = self.tableView.cellForRowAtIndexPath(indexPath) as TweetCell?
+                cellForImage?.tweetAvatar.image = image
+            })
+        }
         
         //sets image properties (round, has a boarder, clips to container). A lot of it is superfluous.
         cell.tweetAvatar.layer.cornerRadius = cell.tweetAvatar.frame.size.width / 2
@@ -71,6 +98,8 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
         cell.tweetAvatar.clipsToBounds = true
         cell.tweetAvatar.contentMode = UIViewContentMode.ScaleAspectFill
         cell.tweetAvatar.setNeedsDisplay()
+        
+        cell.tweetTime.text = tweet?.timeStamp
         
         switch tweetSortStyle
         {
@@ -89,6 +118,15 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource
         cell.tweetText?.text = tweet?.text
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let tweet = self.tweets?[indexPath.row]
+        self.lastIndexPath = indexPath
+        let destinationVC = self.storyboard?.instantiateViewControllerWithIdentifier("SINGLE_TWEET_VC") as SingleTweetViewController
+        destinationVC.singleTweet = tweet
+        self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     func sortTweets ()

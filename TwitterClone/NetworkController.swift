@@ -15,9 +15,11 @@ class NetworkController
 
     let accountStore = ACAccountStore()
     var twitterAccount : ACAccount?
+    let imageQueue = NSOperationQueue()
     
     init ()
     {
+        self.imageQueue.maxConcurrentOperationCount = 10
     }
     
     func fetchHomeTimeLine(completionHandler : (errorDescription : String?, tweets : [Tweet]?) -> (Void)) {
@@ -62,6 +64,19 @@ class NetworkController
                     
                     })
             }
+        }
+        
+    }
+    
+    func downloadUserImageForTweet(tweet : Tweet, completionHandler : (image : UIImage) -> (Void)) {
+        
+        self.imageQueue.addOperationWithBlock { () -> Void in
+            let imageData = NSData(contentsOfURL: tweet.avatarURL!)
+            let avatarImage = UIImage(data: imageData)
+            tweet.avatar = avatarImage
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                completionHandler(image: avatarImage)
+            })
         }
         
     }

@@ -8,10 +8,26 @@
 
 import UIKit
 
-class TweetViewController: UIViewController {
-
+class SingleTweetViewController: UIViewController
+{
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var twitterNameLabel: UILabel!
+    @IBOutlet weak var twitterHandleLabel: UILabel!
+    @IBOutlet weak var tweetBodyLabel: UILabel!
+    @IBOutlet weak var timeStampLabel: UILabel!
+    @IBOutlet weak var favoritesLabel: UILabel!
+    
+    var singleTweet : Tweet?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.avatarImageView.image = singleTweet?.avatar
+        self.twitterNameLabel.text = singleTweet?.name
+        self.twitterHandleLabel.text = singleTweet?.handle
+        self.tweetBodyLabel.text = singleTweet?.text
+        self.timeStampLabel.text = singleTweet?.timeStamp
 
         //let normalRange = avatarString?.rangeOfString("_normal", options: nil, range: nil, locale: nil)
         //let newString = avatarString?.stringByReplacingCharactersInRange(normalRange!, withString: "_bigger")
