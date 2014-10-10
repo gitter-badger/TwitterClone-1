@@ -10,6 +10,7 @@ import UIKit
 
 class SingleTweetViewController: UIViewController
 {
+    // MARK: Outlets
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var twitterNameLabel: UILabel!
     @IBOutlet weak var twitterHandleLabel: UILabel!
@@ -17,8 +18,16 @@ class SingleTweetViewController: UIViewController
     @IBOutlet weak var timeStampLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
     
+    // MARK: Properties
     var singleTweet : Tweet?
     
+    // MARK: Actions
+    @IBAction func avatarTapped(sender: AnyObject)
+    {
+        
+    }
+    
+    // MARK: - View Methods
     
     override func viewDidLoad()
     {
@@ -36,11 +45,21 @@ class SingleTweetViewController: UIViewController
     
     override func viewWillAppear(animated: Bool)
     {
+        super.viewWillAppear(animated)
+        
+        //image stuff
         self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
-        self.avatarImageView.layer.masksToBounds = true
         self.avatarImageView.layer.borderWidth = 0.5
+        self.avatarImageView.layer.borderColor = UIColor.grayColor().CGColor
+        self.avatarImageView.layer.masksToBounds = true
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
     }
 
+    // MARK: - This stupid thing
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

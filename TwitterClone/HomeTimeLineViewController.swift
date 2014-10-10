@@ -19,6 +19,9 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     var tweetSortStyle: String = "default"
     var networkController = NetworkController()
     var lastIndexPath : NSIndexPath?
+    var refreshControl:UIRefreshControl!
+    let homeTimeLineURLString = "https://api.twitter.com/1.1/statuses/home_timeline.json"
+    var sinceIdUrlString : String?
     
     //MARK: View methods
     
@@ -26,8 +29,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     {
         super.viewDidLoad()
         self.tableView.delegate = self
-        
-        self.networkController.fetchHomeTimeLine
+        self.networkController.fetchTimeLine (self.homeTimeLineURLString)
         { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil
             {
@@ -43,6 +45,12 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         //auto row size
         //self.tableView.rowHeight = UITableViewAutomaticDimension
         //self.tableView.estimatedRowHeight = 80.0
+        
+        //pull to refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(self.refreshControl)
         
         let sortButton = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.Plain, target: self, action: "sortTweets")
         self.navigationItem.leftBarButtonItem = sortButton
@@ -134,6 +142,23 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     //MARK: Other stuff
+    
+    func refresh(sender: AnyObject!)
+    {
+        println("HERE I IS")
+        var lastTweet : Tweet = self.tweets![0]
+        var lastTweetID : String = lastTweet.id.description
+        self.sinceIdUrlString = homeTimeLineURLString + "?since_id=" + lastTweetID
+        self.networkController.fetchTimeLine(sinceIdUrlString!, completionHandler:
+        { (errorDescription, tweets) -> (Void) in
+            println("HERE I IS")
+            if let newTweets = tweets {
+                self.tweets = tweets! + self.tweets!
+                self.tableView.reloadData()
+            }
+            self.refreshControl.endRefreshing()
+        })
+    }
     
     func sortTweets ()
     {

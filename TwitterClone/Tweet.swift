@@ -17,6 +17,7 @@ class Tweet
     var avatarURL : NSURL?
     var handle : String?
     var timeStamp : String?
+    var id : Int
     
     init (tweetInfo : NSDictionary)
     {
@@ -39,6 +40,8 @@ class Tweet
         let date = formatter.dateFromString(tweetInfo["created_at"] as String)!
         formatter.dateFormat = "h:mm a"
         self.timeStamp = formatter.stringFromDate(date)
+        //set id
+        self.id = tweetInfo["id"] as Int
     }
     
     class func parseJSONDataIntoTweets(rawJSONData: NSData) -> [Tweet]?

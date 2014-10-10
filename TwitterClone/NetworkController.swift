@@ -22,7 +22,7 @@ class NetworkController
         self.imageQueue.maxConcurrentOperationCount = 10
     }
     
-    func fetchHomeTimeLine(completionHandler : (errorDescription : String?, tweets : [Tweet]?) -> (Void)) {
+    func fetchTimeLine(targetURL: String, completionHandler : (errorDescription : String?, tweets : [Tweet]?) -> (Void)) {
         
         let accountStore = self.accountStore
         let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
@@ -34,7 +34,7 @@ class NetworkController
                 self.twitterAccount = accounts.first as ACAccount?
                 
                 //twitter request
-                let url = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
+                let url = NSURL(string: targetURL)
                 let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: nil)
                 twitterRequest.account = self.twitterAccount
                 
