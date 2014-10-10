@@ -12,11 +12,15 @@ import Social
 
 class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
+    //MARK: Properties and outlets
+    
     @IBOutlet weak var tableView: UITableView!
     var tweets : [Tweet]?
     var tweetSortStyle: String = "default"
     var networkController = NetworkController()
     var lastIndexPath : NSIndexPath?
+    
+    //MARK: View methods
     
     override func viewDidLoad()
     {
@@ -37,8 +41,8 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         }
         
         //auto row size
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
-//        self.tableView.estimatedRowHeight = 80.0
+        //self.tableView.rowHeight = UITableViewAutomaticDimension
+        //self.tableView.estimatedRowHeight = 80.0
         
         let sortButton = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.Plain, target: self, action: "sortTweets")
         self.navigationItem.leftBarButtonItem = sortButton
@@ -128,6 +132,8 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         destinationVC.singleTweet = tweet
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
+    
+    //MARK: Other stuff
     
     func sortTweets ()
     {

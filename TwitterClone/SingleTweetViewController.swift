@@ -20,7 +20,8 @@ class SingleTweetViewController: UIViewController
     var singleTweet : Tweet?
     
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         self.avatarImageView.image = singleTweet?.avatar
@@ -31,6 +32,13 @@ class SingleTweetViewController: UIViewController
 
         //let normalRange = avatarString?.rangeOfString("_normal", options: nil, range: nil, locale: nil)
         //let newString = avatarString?.stringByReplacingCharactersInRange(normalRange!, withString: "_bigger")
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
+        self.avatarImageView.layer.masksToBounds = true
+        self.avatarImageView.layer.borderWidth = 0.5
     }
 
     override func didReceiveMemoryWarning() {
