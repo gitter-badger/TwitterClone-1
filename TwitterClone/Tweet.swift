@@ -18,6 +18,7 @@ class Tweet
     var handle : String?
     var timeStamp : String?
     var id : Int
+    var biggerAvatarURL : NSURL?
     
     init (tweetInfo : NSDictionary)
     {
@@ -42,6 +43,9 @@ class Tweet
         self.timeStamp = formatter.stringFromDate(date)
         //set id
         self.id = tweetInfo["id"] as Int
+        //set url for bigger avatar
+        let biggerAvatarURLString = avatarURLString.stringByReplacingOccurrencesOfString("_normal", withString: "_bigger", options: nil, range: nil)
+        self.biggerAvatarURL = NSURL(string: biggerAvatarURLString)
     }
     
     class func parseJSONDataIntoTweets(rawJSONData: NSData) -> [Tweet]?

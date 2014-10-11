@@ -16,10 +16,21 @@ class NetworkController
     let accountStore = ACAccountStore()
     var twitterAccount : ACAccount?
     let imageQueue = NSOperationQueue()
+    var imageCache = [String:[UIImage]]() // [Username:[small,big]]
     
     init ()
     {
         self.imageQueue.maxConcurrentOperationCount = 10
+    }
+    
+    //Makes NetworkController a singleton
+    class var sharedInstance: NetworkController
+    {
+        struct Static
+        {
+            static let instance = NetworkController()
+        }
+        return Static.instance
     }
     
     func fetchTimeLine(targetURL: String, completionHandler : (errorDescription : String?, tweets : [Tweet]?) -> (Void)) {
