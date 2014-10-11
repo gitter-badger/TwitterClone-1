@@ -20,6 +20,7 @@ class SingleTweetViewController: UIViewController
     
     // MARK: Properties
     var singleTweet : Tweet?
+    var networkController = NetworkController()
     
     // MARK: Actions
     @IBAction func avatarTapped(sender: AnyObject)
@@ -33,7 +34,22 @@ class SingleTweetViewController: UIViewController
     {
         super.viewDidLoad()
         
-        self.avatarImageView.image = singleTweet?.avatar
+        let handle = singleTweet!.handle as String!
+        let myCount = self.networkController.imageCache[handle]?.count
+        let imageArray = self.networkController.imageCache[handle] as [UIImage]!
+        
+        if (myCount == 2)
+        {
+            self.avatarImageView.image = imageArray[1]
+        }
+        else
+        {
+            self.networkController.downloadUserImageForTweet(singleTweet!, completionHandler:  //add logic for downloading the bigger image
+            { (image) -> (Void) in
+                self.avatarImageView.image = image
+            })
+        }
+        
         self.twitterNameLabel.text = singleTweet?.name
         self.twitterHandleLabel.text = singleTweet?.handle
         self.tweetBodyLabel.text = singleTweet?.text

@@ -79,17 +79,29 @@ class NetworkController
         
     }
     
-    func downloadUserImageForTweet(tweet : Tweet, completionHandler : (image : UIImage) -> (Void)) {
-        
-        self.imageQueue.addOperationWithBlock { () -> Void in
-            let imageData = NSData(contentsOfURL: tweet.avatarURL!)
-            let avatarImage = UIImage(data: imageData)
-            tweet.avatar = avatarImage
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                completionHandler(image: avatarImage)
-            })
-        }
-        
+    func downloadUserImageForTweet(tweet : Tweet, completionHandler : (image : UIImage) -> (Void))
+    {
+        self.imageQueue.addOperationWithBlock
+            { () -> Void in
+                let imageData = NSData(contentsOfURL: tweet.avatarURL!)
+                let avatarImage = UIImage(data: imageData)
+                let handle = tweet.handle as String!
+                var imageArray = self.imageCache[handle] as [UIImage]!
+                
+                if (self.imageCache[handle] == nil)
+                {
+                    self.imageCache[handle] = [avatarImage] //maybe put the image download code here so you can put the bigger image download in the else?
+                }
+                else
+                {
+                    imageArray.append(avatarImage)
+                }
+                
+            NSOperationQueue.mainQueue().addOperationWithBlock(
+                { () -> Void in
+                    completionHandler(image: avatarImage)
+                })
+            }
     }
-    
+
 }

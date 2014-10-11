@@ -12,40 +12,47 @@ import UIKit
 class Tweet
 {
     var text : String?
-    var avatar : UIImage?
     var name : String?
     var avatarURL : NSURL?
     var handle : String?
     var timeStamp : String?
     var id : Int
     var biggerAvatarURL : NSURL?
+    var networkController = NetworkController()
     
     init (tweetInfo : NSDictionary)
     {
         //get tweet
         self.text = tweetInfo["text"] as? String
-        //get avatar
+        
+        //get get user info
         let userInfo = tweetInfo["user"] as NSDictionary
-        let avatarURLString = userInfo["profile_image_url"] as String
-        self.avatarURL = NSURL(string: avatarURLString)
-        let avatarData = NSData(contentsOfURL: self.avatarURL!)
-        self.avatar = UIImage(data: avatarData)
+        
         //get name
         self.name = userInfo["name"] as? String
+        
         //get handle
         var screenName = userInfo["screen_name"] as String
         self.handle = "@" + screenName
+        
         //get timestamp
         let formatter = NSDateFormatter()
         formatter.dateFormat = "E MMM dd HH:mm:ssZ yyyy"
         let date = formatter.dateFromString(tweetInfo["created_at"] as String)!
         formatter.dateFormat = "h:mm a"
         self.timeStamp = formatter.stringFromDate(date)
+        
         //set id
         self.id = tweetInfo["id"] as Int
-        //set url for bigger avatar
+        
+        //set url for avatar
+        let avatarURLString = userInfo["profile_image_url"] as String
+        self.avatarURL = NSURL(string: avatarURLString)
+        
+        //set url for bigger avatr
         let biggerAvatarURLString = avatarURLString.stringByReplacingOccurrencesOfString("_normal", withString: "_bigger", options: nil, range: nil)
         self.biggerAvatarURL = NSURL(string: biggerAvatarURLString)
+        
     }
     
     class func parseJSONDataIntoTweets(rawJSONData: NSData) -> [Tweet]?

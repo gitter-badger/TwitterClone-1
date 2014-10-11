@@ -84,15 +84,16 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
         var tweet = self.tweets?[indexPath.row]
-//        cell.tweetText.
+        var handle = tweet?.handle
+        var imageArray = self.networkController.imageCache[handle!] as [UIImage]!
         
         //sets twitter handle for tweet
         cell.tweetName.text = tweet?.name
         
         //sets avatar image for tweet
-        if tweet?.avatar != nil
+        if self.networkController.imageCache[tweet!.handle!] != nil
         {
-            cell.tweetAvatar.image = tweet?.avatar
+            cell.tweetAvatar.image = imageArray[0]
         }
         else
         {
