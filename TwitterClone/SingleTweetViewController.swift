@@ -44,7 +44,7 @@ class SingleTweetViewController: UIViewController
         }
         else
         {
-            self.networkController.downloadUserImageForTweet(singleTweet!, completionHandler:  //add logic for downloading the bigger image
+            self.networkController.fetchUserImage(singleTweet!, isSmallerImage: false, completionHandler:  //add logic for downloading the bigger image
             { (image) -> (Void) in
                 self.avatarImageView.image = image
             })

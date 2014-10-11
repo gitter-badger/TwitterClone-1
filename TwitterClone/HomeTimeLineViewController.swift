@@ -87,22 +87,21 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         var handle = tweet?.handle
         var imageArray = self.networkController.imageCache[handle!] as [UIImage]!
         
-        //sets twitter handle for tweet
-        cell.tweetName.text = tweet?.name
-        
-        //sets avatar image for tweet
-        if self.networkController.imageCache[tweet!.handle!] != nil
-        {
-            cell.tweetAvatar.image = imageArray[0]
-        }
-        else
-        {
-            self.networkController.downloadUserImageForTweet(tweet!, completionHandler:
+//        //sets twitter handle for tweet
+//        cell.tweetName.text = tweet?.name
+//        
+//        //sets avatar image for tweet
+//        if self.networkController.imageCache[tweet!.handle!] != nil
+//        {
+//            cell.tweetAvatar.image = imageArray[0]
+//        }
+//        else
+//        {
+            self.networkController.fetchUserImage(tweet!, isSmallerImage: true, completionHandler:
             { (image) -> (Void) in
-                let cellForImage = self.tableView.cellForRowAtIndexPath(indexPath) as TweetCell?
-                cellForImage?.tweetAvatar.image = image
+                cell.tweetAvatar.image = image
             })
-        }
+//        }
         
         //sets image properties (round, has a boarder, clips to container). A lot of it is superfluous.
         cell.tweetAvatar.layer.cornerRadius = cell.tweetAvatar.frame.size.width / 2

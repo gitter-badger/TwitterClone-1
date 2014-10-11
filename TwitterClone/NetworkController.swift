@@ -38,7 +38,8 @@ class NetworkController
         let accountStore = self.accountStore
         let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         
-        accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted : Bool, error : NSError!) -> Void in
+        accountStore.requestAccessToAccountsWithType(accountType, options: nil)
+        { (granted : Bool, error : NSError!) -> Void in
             if granted
             {
                 let accounts = accountStore.accountsWithAccountType(accountType)
@@ -72,36 +73,63 @@ class NetworkController
                             default:
                                 println("something bad happened")
                         }
-                    
                     })
             }
         }
         
     }
     
-    func downloadUserImageForTweet(tweet : Tweet, completionHandler : (image : UIImage) -> (Void))
-    {
-        self.imageQueue.addOperationWithBlock
-            { () -> Void in
-                let imageData = NSData(contentsOfURL: tweet.avatarURL!)
-                let avatarImage = UIImage(data: imageData)
-                let handle = tweet.handle as String!
-                var imageArray = self.imageCache[handle] as [UIImage]!
-                
-                if (self.imageCache[handle] == nil)
+    func fetchUserImage(tweet : Tweet, isSmallerImage : Bool, completionHandler : (image : UIImage) -> (Void))
+    {self.imageQueue.addOperationWithBlock
+        { () -> Void in
+            let handle = tweet.handle as String!
+            var imageArray = self.imageCache[handle] as [UIImage]!
+            var avatarImage : UIImage?
+            
+            if (self.imageCache[handle] == nil)
+            {
+                self.imageCache[handle] = []
+                imageArray = self.imageCache[handle]
+            }
+            else
+            {
+                println("There is already an image cache entry for this handle.")
+            }
+            
+            if isSmallerImage == true
+            {
+                if (imageArray.isEmpty == true)
                 {
-                    self.imageCache[handle] = [avatarImage] //maybe put the image download code here so you can put the bigger image download in the else?
+                    let imageData = NSData(contentsOfURL: tweet.avatarURL!)
+                    let smallerAvatarImage = UIImage(data: imageData)
+                    imageArray.append(smallerAvatarImage)
+                    avatarImage = smallerAvatarImage
                 }
                 else
                 {
-                    imageArray.append(avatarImage)
+                    avatarImage = imageArray[0]
                 }
-                
-            NSOperationQueue.mainQueue().addOperationWithBlock(
-                { () -> Void in
-                    completionHandler(image: avatarImage)
-                })
             }
+            else
+            {
+                if (imageArray.count == 1)
+                {
+                    let imageData = NSData(contentsOfURL: tweet.biggerAvatarURL!)
+                    let biggerAvatarImage = UIImage(data: imageData)
+                    imageArray.append(biggerAvatarImage)
+                    avatarImage = biggerAvatarImage
+                }
+                else
+                {
+                    avatarImage = imageArray[1]
+                }
+            }
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock(
+            { () -> Void in
+                completionHandler(image: avatarImage!)
+            })
+        }
     }
 
 }
